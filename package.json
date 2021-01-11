@@ -1,0 +1,28 @@
+{
+  "name": "onja-weather-app",
+  "version": "1.0.0",
+  "description": "Onja weather application",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fodilahy-mena/onja-weather-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fodilahy-mena/onja-weather-app/issues"
+  },
+  "homepage": "https://github.com/Fodilahy-mena/onja-weather-app#readme",
+  "browserslist": [
+    "last 1 chrome version"
+  ],
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.0"
+  }
+}

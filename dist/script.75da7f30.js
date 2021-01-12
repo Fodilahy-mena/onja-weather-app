@@ -29941,6 +29941,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App() {
+  const [consolidatedWeather, setConsolidatedWeather] = (0, _react.useState)([]);
   const {
     state,
     dispatch,
@@ -29961,7 +29962,20 @@ function App() {
     });
   }
 
-  console.log(locationWoeid !== null && locationWoeid.title);
+  (0, _react.useEffect)(() => {
+    if (locationWoeid !== null) {
+      const today = consolidatedWeather[0];
+      const tomorrow = consolidatedWeather[1];
+      console.log(today);
+      console.log("tom", tomorrow); // const sixDaysWeather = consolidatedWeather;
+      // console.log(sixDaysWeather);
+
+      setConsolidatedWeather(locationWoeid.consolidated_weather);
+    }
+
+    console.log(consolidatedWeather);
+  });
+  console.log(new Date('2021-01-12').toDateString());
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
     className: "form_search"
@@ -29975,7 +29989,7 @@ function App() {
       });
     },
     placeholder: "Search for a place"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, null)), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null))), /*#__PURE__*/_react.default.createElement("h2", null, "Today's Highlight"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))));
+  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, null)), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("h3", null), /*#__PURE__*/_react.default.createElement("img", null), /*#__PURE__*/_react.default.createElement("div", null)))), /*#__PURE__*/_react.default.createElement("h2", null, "Today's Highlight"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null))));
 }
 
 var _default = App;
@@ -34105,7 +34119,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57692" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50732" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

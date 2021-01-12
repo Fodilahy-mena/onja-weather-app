@@ -3,6 +3,7 @@ import { Context } from '../Context';
 import SearchResult from './SearchResult';
 
 function App() {
+    const [consolidatedWeather, setConsolidatedWeather] = useState([]);
     const {state, dispatch, fetchData} = useContext(Context);
     const {location,place, locationWoeid} = state;
     console.log(location)
@@ -12,7 +13,21 @@ function App() {
         dispatch({ type: 'LOCATION', location: fetchData() });
         
     }
-    console.log(locationWoeid !== null && locationWoeid.title)
+    useEffect(() => {
+        if(locationWoeid !== null) {
+            const today = consolidatedWeather[0];
+            const tomorrow = consolidatedWeather[1];
+            console.log(today)
+            console.log("tom", tomorrow)
+            // const sixDaysWeather = consolidatedWeather;
+            // console.log(sixDaysWeather);
+            setConsolidatedWeather(locationWoeid.consolidated_weather);
+        }
+        console.log(consolidatedWeather)
+    })
+    
+    
+    console.log(new Date('2021-01-12').toDateString());
     return (
         <>
             <section>
@@ -27,18 +42,15 @@ function App() {
             <section>
                 <nav>
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li>
+                            <h3></h3>
+                            <img/>
+                            <div></div>
+                        </li>
                     </ul>
                 </nav>
                 <h2>Today's Highlight</h2>
                 <div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                     <div></div>
                 </div>
             </section>

@@ -29787,103 +29787,95 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+const QUERY_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=`;
+const WOEID_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/`;
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var Context = _react.default.createContext();
+const Context = _react.default.createContext();
 
 exports.Context = Context;
-var QUERY_URL = "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=";
 
 function ContextProvider(props) {
-  var _useReducer = (0, _react.useReducer)(function (state, action) {
+  let [state, dispatch] = (0, _react.useReducer)((state, action) => {
     switch (action.type) {
       case 'LOCATION':
         {
-          return _objectSpread(_objectSpread({}, state), {}, {
+          return { ...state,
             location: action.location
-          });
+          };
+        }
+
+      case 'SWITCH_PLACE':
+        {
+          return { ...state,
+            place: action.switchPlace
+          };
+        }
+
+      case 'LOCATION_WOEID':
+        {
+          return { ...state,
+            locationWoeid: action.locationWoeid
+          };
+        }
+
+      case 'SWITCH_WOEID':
+        {
+          return { ...state,
+            woeid: action.switchWoeid
+          };
         }
 
       default:
         return state;
     }
   }, {
-    location: [] // query: 'San Antonio',
+    location: null,
+    place: 'san',
+    woeid: '44418',
+    locationWoeid: null
+  });
 
-  }),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  function getData() {
-    return _getData.apply(this, arguments);
+  async function fetchData() {
+    const response = await fetch(QUERY_URL + state.place);
+    const data = await response.json();
+    dispatch({
+      type: 'LOCATION',
+      location: data
+    });
   }
 
-  function _getData() {
-    _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var response, data;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return fetch(QUERY_URL + "San Antonio");
+  (0, _react.useEffect)(() => {
+    fetchData();
+  }, []);
 
-            case 2:
-              response = _context.sent;
-              _context.next = 5;
-              return response.json();
-
-            case 5:
-              data = _context.sent;
-              dispatch({
-                type: 'LOCATION',
-                location: data
-              });
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-    return _getData.apply(this, arguments);
+  async function fetchWoeidData() {
+    const response = await fetch(WOEID_URL + `${state.woeid}/`);
+    const data = await response.json();
+    dispatch({
+      type: 'LOCATION_WOEID',
+      locationWoeid: data
+    });
   }
 
-  (0, _react.useEffect)(function () {
-    getData();
-  }, []); // console.log(state.location)
+  console.log(state.locationWoeid);
+  (0, _react.useEffect)(() => {
+    fetchWoeidData();
+  }, []);
+
+  if (typeof state.locationWoeid === 'object' && state.locationWoeid !== null) {
+    console.log("it is an object");
+  }
 
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      state: state,
-      dispatch: dispatch,
-      getData: getData
+      state,
+      dispatch,
+      fetchData,
+      fetchWoeidData
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js"}],"pages/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"pages/SearchResult.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29899,39 +29891,96 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function App() {
-  // const [query, setQuery] = useState("");
-  // const [woeid, setWoeid] = useState("349859");
-  // get the state from context
-  var _useContext = (0, _react.useContext)(_Context.Context),
-      state = _useContext.state,
-      dispatch = _useContext.dispatch; // const {queryResponse, currentPlace, woeidResponse,currentWoeid} = state;
-  //   const WOEID_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${currentWoeid}/`;
+function SearchResult() {
+  const {
+    state,
+    dispatch,
+    fetchData,
+    fetchWoeidData
+  } = (0, _react.useContext)(_Context.Context);
+  const {
+    location
+  } = state;
+  return location !== null ? location.map(loc => /*#__PURE__*/_react.default.createElement("div", {
+    key: loc.woeid
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    id: loc.woeid,
+    onClick: e => {
+      dispatch({
+        type: 'SWITCH_WOEID',
+        switchWoeid: e.target.id
+      });
+      dispatch({
+        type: 'LOCATION_WOEID',
+        locationWoeid: fetchWoeidData()
+      });
+    }
+  }, loc.title))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
+}
 
+var _default = SearchResult;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("../Context");
+
+var _SearchResult = _interopRequireDefault(require("./SearchResult"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function App() {
+  const {
+    state,
+    dispatch,
+    fetchData
+  } = (0, _react.useContext)(_Context.Context);
+  const {
+    location,
+    place,
+    locationWoeid
+  } = state;
+  console.log(location);
 
   function handleSearche(e) {
     e.preventDefault();
-    e.target.reset(); // dispatch({ type: 'SWITCHT_PLACE', switchPlace: query });
-    // dispatch({ type: 'SWITCHT_WOEID', switchWoeid: woeid });
+    dispatch({
+      type: 'LOCATION',
+      location: fetchData()
+    });
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: function onSubmit(e, id) {
-      return handleSearche(e, id);
-    },
+  console.log(locationWoeid !== null && locationWoeid.title);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: e => handleSearche(e),
     className: "form_search"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
-    onChange: function onChange(e) {
-      return setQuery(e.target.value);
+    value: place,
+    onChange: e => {
+      dispatch({
+        type: 'SWITCH_PLACE',
+        switchPlace: e.target.value
+      });
     },
     placeholder: "Search for a place"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")));
+  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, null)), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null))), /*#__PURE__*/_react.default.createElement("h2", null, "Today's Highlight"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null), /*#__PURE__*/_react.default.createElement("div", null))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js","./SearchResult":"pages/SearchResult.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34056,7 +34105,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65174" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57692" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

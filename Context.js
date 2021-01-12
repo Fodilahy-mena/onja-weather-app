@@ -1,7 +1,8 @@
 import React, {useReducer, useEffect} from 'react';
+const QUERY_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=`
+const WOEID_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/`;
 
 const Context = React.createContext();
-const QUERY_URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=`;
 
 function ContextProvider(props) {
     let [state, dispatch] = useReducer((state, action) => {
@@ -9,24 +10,48 @@ function ContextProvider(props) {
           case 'LOCATION': {
             return { ...state, location: action.location}
           }
+          case 'SWITCH_PLACE': {
+            return { ...state, place: action.switchPlace}
+          }
+          case 'LOCATION_WOEID': {
+            return { ...state, locationWoeid: action.locationWoeid}
+          }
+          case 'SWITCH_WOEID': {
+            return { ...state, woeid: action.switchWoeid}
+          }
           default:
-          return state
+          return state;
       }
     }, {
-      location: [],
-      // query: 'San Antonio',
+      location: null,
+      place: 'san',
+      woeid: '44418',
+      locationWoeid: null,
     })
 
-    async function getData() {
-      const response = await fetch(QUERY_URL + "San Antonio");
+    async function fetchData() {
+      const response = await fetch(QUERY_URL + state.place);
       const data = await response.json();
       dispatch({ type: 'LOCATION', location: data });
   }
+  
   useEffect(() => {
-    getData();
+   fetchData();
   }, [])
-// console.log(state.location)
-  return <Context.Provider value={{state, dispatch, getData}}>
+
+  async function fetchWoeidData() {
+    const response = await fetch(WOEID_URL + `${state.woeid}/`);
+    const data = await response.json();
+    dispatch({ type: 'LOCATION_WOEID', locationWoeid: data });
+}
+  console.log(state.locationWoeid)
+  useEffect(() => {
+      fetchWoeidData();
+  }, [])
+  if(typeof state.locationWoeid === 'object' && state.locationWoeid !== null) {
+    console.log("it is an object")
+  }
+  return <Context.Provider value={{state, dispatch, fetchData, fetchWoeidData}}>
               {props.children}
           </Context.Provider>
         

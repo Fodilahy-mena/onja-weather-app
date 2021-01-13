@@ -1,0 +1,63 @@
+body {
+    color: #fff;
+    background-color: #100e1d;
+}
+section {
+    width: 100%;
+    height: 100vh;
+}
+ul {
+    padding: 0;
+}
+.weather__list {
+    list-style: none;
+}
+.list__item {
+    background-color: #1e213a;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.weather__details > div {
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: #1e213a;
+}
+.weather__details > div > div {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+}
+.details__heading {
+    align-items: center;
+}
+.humidity__percentage {
+    display: flex;
+    justify-content: space-between;
+}
+.humidity__progress {
+    width: 100%;
+}
+
+@media (min-width: 799px) {
+    .root {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 32px;
+    }
+    .weather__list {
+        display: grid;
+        grid-template-columns: repeat(5,minmax(0,1fr));
+        grid-gap: 1rem;
+        gap: 1rem;
+    }
+    .weather__details {
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        grid-gap: 1rem;
+        gap: 1rem;
+    }
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

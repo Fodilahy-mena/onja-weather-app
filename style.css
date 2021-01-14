@@ -39,7 +39,9 @@ ul {
 .humidity__progress {
     width: 100%;
 }
-
+.display--none {
+    display: none;
+}
 @media (min-width: 799px) {
     .root {
         display: grid;

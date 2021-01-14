@@ -29861,11 +29861,6 @@ function ContextProvider(props) {
   (0, _react.useEffect)(() => {
     fetchWoeidData();
   }, []);
-
-  if (typeof state.locationWoeid === 'object' && state.locationWoeid !== null) {
-    console.log("it is an object");
-  }
-
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       state,
@@ -29891,17 +29886,22 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function SearchResult() {
+function SearchResult({
+  isChecked,
+  setIsChecked
+}) {
   const {
     state,
     dispatch,
-    fetchData,
     fetchWoeidData
   } = (0, _react.useContext)(_Context.Context);
   const {
-    location
+    location,
+    woeid
   } = state;
+  console.log(isChecked);
   return location !== null ? location.map(loc => /*#__PURE__*/_react.default.createElement("div", {
+    className: isChecked && 'display--none',
     key: loc.woeid
   }, /*#__PURE__*/_react.default.createElement("p", {
     id: loc.woeid,
@@ -29910,10 +29910,9 @@ function SearchResult() {
         type: 'SWITCH_WOEID',
         switchWoeid: e.target.id
       });
-      dispatch({
-        type: 'LOCATION_WOEID',
-        locationWoeid: fetchWoeidData()
-      });
+      fetchWoeidData();
+      setIsChecked(true);
+      console.log(woeid);
     }
   }, loc.title))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
 }
@@ -29941,6 +29940,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App() {
+  const [isChecked, setIsChecked] = (0, _react.useState)(true);
   const [consolidatedWeather, setConsolidatedWeather] = (0, _react.useState)([]);
   const {
     state,
@@ -29948,19 +29948,13 @@ function App() {
     fetchData
   } = (0, _react.useContext)(_Context.Context);
   const {
-    location,
-    place,
     locationWoeid
   } = state;
 
   function handleSearche(e) {
-    e.preventDefault(); // dispatch({ type: 'LOCATION', location: fetchData() });
-
-    dispatch({
-      type: 'SWITCH_PLACE',
-      switchPlace: e.target.value
-    });
-    console.log("place query", place);
+    e.preventDefault();
+    fetchData();
+    setIsChecked(false);
   }
 
   (0, _react.useEffect)(() => {
@@ -29968,15 +29962,24 @@ function App() {
       setConsolidatedWeather(locationWoeid.consolidated_weather);
     }
 
-    console.log(consolidatedWeather);
+    console.log(consolidatedWeather.slice(0, 1).map(c => c));
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
     className: "form_search"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    onChange: e => {
+      dispatch({
+        type: 'SWITCH_PLACE',
+        switchPlace: e.target.value
+      });
+    },
     placeholder: "Search for a place"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, null), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
+    isChecked: isChecked,
+    setIsChecked: setIsChecked
+  }), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
     className: "list__item"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
@@ -34139,7 +34142,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65139" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59193" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

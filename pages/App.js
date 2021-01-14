@@ -3,22 +3,22 @@ import { Context } from '../Context';
 import SearchResult from './SearchResult';
 
 function App() {
+    const [isChecked, setIsChecked] = useState(true);
     const [consolidatedWeather, setConsolidatedWeather] = useState([]);
     const {state, dispatch, fetchData} = useContext(Context);
-    const {location,place, locationWoeid} = state;
+    const {locationWoeid} = state;
     
 
     function handleSearche(e) {
         e.preventDefault();
-        // dispatch({ type: 'LOCATION', location: fetchData() });
-        dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
-        console.log("place query",place)
+        fetchData()
+        setIsChecked(false)
     }
     useEffect(() => {
         if(locationWoeid !== null) {
             setConsolidatedWeather(locationWoeid.consolidated_weather);
         }
-        console.log(consolidatedWeather)
+        console.log(consolidatedWeather.slice(0, 1).map(c => c))
         
     })
     
@@ -26,10 +26,12 @@ function App() {
         <>
             <section>
                 <form onSubmit={(e) => handleSearche(e)} className="form_search">
-                    <input type="text" placeholder="Search for a place"/>
+                    <input type="text" onChange={(e) => {
+                        dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
+                    }} placeholder="Search for a place"/>
                     <button>Search</button>
                 </form>
-                <SearchResult/>
+                <SearchResult isChecked={isChecked} setIsChecked={setIsChecked}/>
                 {locationWoeid !== null && consolidatedWeather[0] 
                 ? 
                 <div className="list__item">

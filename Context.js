@@ -48,9 +48,7 @@ function ContextProvider(props) {
   useEffect(() => {
       fetchWoeidData();
   }, [])
-  if(typeof state.locationWoeid === 'object' && state.locationWoeid !== null) {
-    console.log("it is an object")
-  }
+  
   return <Context.Provider value={{state, dispatch, fetchData, fetchWoeidData}}>
               {props.children}
           </Context.Provider>

@@ -29870,154 +29870,7 @@ function ContextProvider(props) {
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js"}],"pages/SearchResult.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Context = require("../Context");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function SearchResult({
-  isChecked,
-  setIsChecked
-}) {
-  const {
-    state,
-    dispatch,
-    fetchWoeidData
-  } = (0, _react.useContext)(_Context.Context);
-  const {
-    location,
-    woeid
-  } = state;
-  console.log(isChecked);
-  return location !== null ? location.map(loc => /*#__PURE__*/_react.default.createElement("div", {
-    className: isChecked && 'display--none',
-    key: loc.woeid
-  }, /*#__PURE__*/_react.default.createElement("p", {
-    id: loc.woeid,
-    onClick: e => {
-      dispatch({
-        type: 'SWITCH_WOEID',
-        switchWoeid: e.target.id
-      });
-      fetchWoeidData();
-      setIsChecked(true);
-      console.log(woeid);
-    }
-  }, loc.title))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
-}
-
-var _default = SearchResult;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _Context = require("../Context");
-
-var _SearchResult = _interopRequireDefault(require("./SearchResult"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function App() {
-  const [isChecked, setIsChecked] = (0, _react.useState)(true);
-  const [consolidatedWeather, setConsolidatedWeather] = (0, _react.useState)([]);
-  const {
-    state,
-    dispatch,
-    fetchData
-  } = (0, _react.useContext)(_Context.Context);
-  const {
-    locationWoeid
-  } = state;
-
-  function handleSearche(e) {
-    e.preventDefault();
-    fetchData();
-    setIsChecked(false);
-  }
-
-  (0, _react.useEffect)(() => {
-    if (locationWoeid !== null) {
-      setConsolidatedWeather(locationWoeid.consolidated_weather);
-    }
-
-    console.log(consolidatedWeather.slice(0, 1).map(c => c));
-  });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: e => handleSearche(e),
-    className: "form_search"
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    onChange: e => {
-      dispatch({
-        type: 'SWITCH_PLACE',
-        switchPlace: e.target.value
-      });
-    },
-    placeholder: "Search for a place"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
-    isChecked: isChecked,
-    setIsChecked: setIsChecked
-  }), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "list__item"
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(consolidatedWeather[0].the_temp)} \xB0C`), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading...")), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("nav", null, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("ul", {
-    className: "weather__list"
-  }, locationWoeid.consolidated_weather.slice(1).map((consWeather, index) => /*#__PURE__*/_react.default.createElement("li", {
-    className: "list__item",
-    key: consWeather.id
-  }, /*#__PURE__*/_react.default.createElement("span", null, index === 0 ? "Tomorrow" : new Date(consWeather.applicable_date).toDateString('en-us', {
-    day: 'numeric',
-    weekday: 'short',
-    month: 'short'
-  })), /*#__PURE__*/_react.default.createElement("img", {
-    src: `https://www.metaweather.com//static/img/weather/${consWeather.weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(consWeather.max_temp)} \xB0C`), /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(consWeather.min_temp)} \xB0C`))))) : ''), /*#__PURE__*/_react.default.createElement("h2", null, "Today's Highlight"), /*#__PURE__*/_react.default.createElement("div", {
-    className: "weather__details"
-  }, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("span", null, Math.floor(consolidatedWeather[0].wind_direction), " mph"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "details__humidity"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].humidity, " %")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "humidity__percentage"
-  }, /*#__PURE__*/_react.default.createElement("div", null, "01"), /*#__PURE__*/_react.default.createElement("div", null, "50"), /*#__PURE__*/_react.default.createElement("div", null, "100")), /*#__PURE__*/_react.default.createElement("progress", {
-    className: "humidity__progress",
-    value: consolidatedWeather[0].humidity,
-    max: "100"
-  }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("h5", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " miles"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("h5", null, Math.floor(consolidatedWeather[0].air_pressure), " mb")))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading...."))));
-}
-
-var _default = App;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../Context":"Context.js","./SearchResult":"pages/SearchResult.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34098,7 +33951,238 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"script.js":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"pages/SearchResult.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("../Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function SearchResult({
+  isChecked,
+  setIsChecked
+}) {
+  const {
+    state,
+    dispatch,
+    fetchWoeidData
+  } = (0, _react.useContext)(_Context.Context);
+  const {
+    location
+  } = state;
+
+  if (location !== null) {
+    console.log(location.length);
+  }
+
+  console.log(location);
+  return location !== null && location.map(loc => location.length > 0 ? /*#__PURE__*/_react.default.createElement("div", {
+    className: isChecked == true ? 'display--none' : '',
+    key: loc.woeid
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    id: loc.woeid,
+    onClick: e => {
+      dispatch({
+        type: 'SWITCH_WOEID',
+        switchWoeid: e.target.id
+      });
+      fetchWoeidData();
+      setIsChecked(true);
+      console.log("value", e.target.textContent);
+    }
+  }, loc.title)) : /*#__PURE__*/_react.default.createElement("p", {
+    className: isChecked && 'display--none',
+    onClick: () => setIsChecked(true)
+  }, "Not found"));
+}
+
+var _default = SearchResult;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/WeatherDetails.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("../Context");
+
+var _reactRouterDom = require("react-router-dom");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function WeatherDetails({
+  consolidatedWeather
+}) {
+  const {
+    state
+  } = (0, _react.useContext)(_Context.Context);
+  const {
+    locationWoeid
+  } = state;
+  const {
+    weatherId
+  } = (0, _reactRouterDom.useParams)();
+  const thisWeather = consolidatedWeather.find(weath => weath.id == weatherId);
+  return thisWeather && locationWoeid !== null ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, new Date(thisWeather.applicable_date).toDateString(), " Highlight"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "weather__details"
+  }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("span", null, Math.floor(thisWeather.wind_direction), " mph"), /*#__PURE__*/_react.default.createElement("h5", null, thisWeather.wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__humidity"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("h5", null, thisWeather.humidity, " %")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "humidity__percentage"
+  }, /*#__PURE__*/_react.default.createElement("div", null, "01"), /*#__PURE__*/_react.default.createElement("div", null, "50"), /*#__PURE__*/_react.default.createElement("div", null, "100")), /*#__PURE__*/_react.default.createElement("progress", {
+    className: "humidity__progress",
+    value: thisWeather.humidity,
+    max: "100"
+  }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("h5", null, Math.round(thisWeather.visibility * 100) / 100, " miles"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("h5", null, Math.floor(thisWeather.air_pressure), " mb")))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
+}
+
+var _default = WeatherDetails;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../Context":"Context.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"pages/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("../Context");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _SearchResult = _interopRequireDefault(require("./SearchResult"));
+
+var _WeatherDetails = _interopRequireDefault(require("./WeatherDetails"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function App() {
+  const [isChecked, setIsChecked] = (0, _react.useState)(true);
+  const [consolidatedWeather, setConsolidatedWeather] = (0, _react.useState)([]);
+  const {
+    state,
+    dispatch,
+    fetchData,
+    fetchWoeidData
+  } = (0, _react.useContext)(_Context.Context);
+  const {
+    locationWoeid
+  } = state;
+  const [linkCkicked, setLinkClicked] = (0, _react.useState)(false);
+  const [toFahrenheit, setToFahrenheit] = (0, _react.useState)(false);
+  console.log("lnk", linkCkicked);
+
+  function handleSearche(e) {
+    e.preventDefault();
+    fetchData();
+    setIsChecked(false);
+  }
+
+  (0, _react.useEffect)(() => {
+    if (locationWoeid !== null) {
+      setConsolidatedWeather(locationWoeid.consolidated_weather);
+    }
+  });
+  console.log("lw", locationWoeid);
+  console.log("toFah", toFahrenheit);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: e => handleSearche(e),
+    className: "form_search"
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    onChange: e => {
+      dispatch({
+        type: 'SWITCH_PLACE',
+        switchPlace: e.target.value
+      });
+    },
+    placeholder: "Search for a place"
+  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
+    isChecked: isChecked,
+    setIsChecked: setIsChecked
+  }), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "list__item",
+    onClick: () => {
+      setLinkClicked(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
+  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading...")), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => setToFahrenheit(false)
+  }, `\xB0C`), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => setToFahrenheit(true)
+  }, `\xB0F`)), /*#__PURE__*/_react.default.createElement("nav", null, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("ul", {
+    className: "weather__list"
+  }, locationWoeid.consolidated_weather.slice(1).map((consWeather, index) => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: `/${consWeather.id}`,
+    key: index
+  }, /*#__PURE__*/_react.default.createElement("li", {
+    onClick: () => setLinkClicked(true),
+    className: "list__item",
+    key: consWeather.id
+  }, /*#__PURE__*/_react.default.createElement("span", null, index === 0 ? "Tomorrow" : new Date(consWeather.applicable_date).toDateString('en-uk', {
+    day: 'numeric',
+    weekday: 'short',
+    month: 'short'
+  })), /*#__PURE__*/_react.default.createElement("img", {
+    src: `https://www.metaweather.com//static/img/weather/${consWeather.weather_state_abbr}.svg`
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.max_temp * 9 / 5 + 32 : consWeather.max_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.min_temp * 9 / 5 + 32 : consWeather.min_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`)))))) : ''), linkCkicked ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/:weatherId"
+  }, /*#__PURE__*/_react.default.createElement(_WeatherDetails.default, {
+    consolidatedWeather: consolidatedWeather
+  }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, "Today's Highlight"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "weather__details"
+  }, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("span", null, Math.floor(consolidatedWeather[0].wind_direction), " mph"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__humidity"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].humidity, " %")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "humidity__percentage"
+  }, /*#__PURE__*/_react.default.createElement("div", null, "01"), /*#__PURE__*/_react.default.createElement("div", null, "50"), /*#__PURE__*/_react.default.createElement("div", null, "100")), /*#__PURE__*/_react.default.createElement("progress", {
+    className: "humidity__progress",
+    value: consolidatedWeather[0].humidity,
+    max: "100"
+  }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("h5", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " miles"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "details__heading"
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("h5", null, Math.floor(consolidatedWeather[0].air_pressure), " mb")))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....")))));
+}
+
+var _default = App;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../Context":"Context.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./SearchResult":"pages/SearchResult.js","./WeatherDetails":"pages/WeatherDetails.js"}],"script.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));

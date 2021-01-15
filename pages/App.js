@@ -29,20 +29,26 @@ function App() {
     return (
         <>
             <section>
-                <button onClick={() => setShowForm(!showForm)}>Search for a place</button>
+                <div>
+                <button className="button__search" onClick={() => {
+                    setShowForm(!showForm)
+                    setIsChecked(false)
+                    }}>Search for a place</button>
                 <div className={`${showForm ? "form__open" : "form__close"} form__container`}>
-                    <button onClick={() => setShowForm(false)}>X</button>
-                    <form onSubmit={(e) => handleSearche(e)} className="form_search">
-                        <input type="text" value={place} onChange={(e) => {
-                            dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
-                        }} placeholder="Search for a place"/>
-                        <button>Search</button>
-                    </form>
-                    <SearchResult setShowForm={setShowForm} isChecked={isChecked} setIsChecked={setIsChecked}/>
+                    <div>
+                        <button onClick={() => setShowForm(false)}>X</button>
+                        <form onSubmit={(e) => handleSearche(e)} className="form_search">
+                            <input type="text" value={place} onChange={(e) => {
+                                dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
+                            }} placeholder="Search for a place"/>
+                            <button>Search</button>
+                        </form>
+                        <SearchResult setShowForm={setShowForm} isChecked={isChecked} setIsChecked={setIsChecked}/>
+                    </div>
                 </div>
                 {locationWoeid !== null && consolidatedWeather[0] 
                 ? 
-                <div className="list__item" onClick={() => {
+                <div onClick={() => {
                     setLinkClicked(false)
                     }}>
                     <img src={`https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`}/>
@@ -53,6 +59,7 @@ function App() {
                 </div>
                 : 
                 <p>Loading...</p>}
+                </div>
             </section>
             <section>
                 <div>

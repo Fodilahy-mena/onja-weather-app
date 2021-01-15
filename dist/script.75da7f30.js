@@ -29830,8 +29830,8 @@ function ContextProvider(props) {
     }
   }, {
     location: null,
-    place: 'Omaha',
-    woeid: 2465512,
+    place: 'San Antonio',
+    woeid: 2487796,
     locationWoeid: null
   });
 
@@ -34117,11 +34117,15 @@ function App() {
       setConsolidatedWeather(locationWoeid.consolidated_weather);
     }
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: () => setShowForm(!showForm)
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    className: "button__search",
+    onClick: () => {
+      setShowForm(!showForm);
+      setIsChecked(false);
+    }
   }, "Search for a place"), /*#__PURE__*/_react.default.createElement("div", {
     className: `${showForm ? "form__open" : "form__close"} form__container`
-  }, /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setShowForm(false)
   }, "X"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
@@ -34140,14 +34144,13 @@ function App() {
     setShowForm: setShowForm,
     isChecked: isChecked,
     setIsChecked: setIsChecked
-  })), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "list__item",
+  }))), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
     onClick: () => {
       setLinkClicked(false);
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading...")), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(false)
   }, `\xB0C`), /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(true)

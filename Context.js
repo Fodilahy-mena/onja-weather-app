@@ -24,8 +24,8 @@ function ContextProvider(props) {
       }
     }, {
       location: null,
-      place: 'Omaha',
-      woeid: 2465512,
+      place: 'San Antonio',
+      woeid: 2487796,
       locationWoeid: null,
     })
 

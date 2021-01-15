@@ -29831,7 +29831,7 @@ function ContextProvider(props) {
   }, {
     location: null,
     place: 'Omaha',
-    woeid: '2465512',
+    woeid: 2465512,
     locationWoeid: null
   });
 
@@ -29848,8 +29848,9 @@ function ContextProvider(props) {
     fetchData();
   }, []);
 
-  async function fetchWoeidData() {
-    const response = await fetch(WOEID_URL + `${state.woeid}/`);
+  async function fetchWoeidData(defaultWoeid = state.woeid) {
+    console.log("default Woeid", defaultWoeid);
+    const response = await fetch(WOEID_URL + `${defaultWoeid}/`);
     const data = await response.json();
     dispatch({
       type: 'LOCATION_WOEID',
@@ -33969,7 +33970,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function SearchResult({
   isChecked,
-  setIsChecked
+  setIsChecked,
+  setShowForm
 }) {
   const {
     state,
@@ -33992,12 +33994,14 @@ function SearchResult({
     id: loc.woeid,
     onClick: e => {
       dispatch({
-        type: 'SWITCH_WOEID',
-        switchWoeid: e.target.id
+        type: 'SWITCH_PLACE',
+        switchPlace: e.target.textContent
       });
-      fetchWoeidData();
-      setIsChecked(true);
-      console.log("value", e.target.textContent);
+      fetchWoeidData(loc.woeid);
+      setTimeout(() => {
+        setIsChecked(true);
+        setShowForm(false);
+      }, 1000);
     }
   }, loc.title)) : /*#__PURE__*/_react.default.createElement("p", {
     className: isChecked && 'display--none',
@@ -34095,11 +34099,12 @@ function App() {
     fetchWoeidData
   } = (0, _react.useContext)(_Context.Context);
   const {
-    locationWoeid
+    locationWoeid,
+    place
   } = state;
   const [linkCkicked, setLinkClicked] = (0, _react.useState)(false);
   const [toFahrenheit, setToFahrenheit] = (0, _react.useState)(false);
-  console.log("lnk", linkCkicked);
+  const [showForm, setShowForm] = (0, _react.useState)(false);
 
   function handleSearche(e) {
     e.preventDefault();
@@ -34112,13 +34117,18 @@ function App() {
       setConsolidatedWeather(locationWoeid.consolidated_weather);
     }
   });
-  console.log("lw", locationWoeid);
-  console.log("toFah", toFahrenheit);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("form", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => setShowForm(!showForm)
+  }, "Search for a place"), /*#__PURE__*/_react.default.createElement("div", {
+    className: `${showForm ? "form__open" : "form__close"} form__container`
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: () => setShowForm(false)
+  }, "X"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
     className: "form_search"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    value: place,
     onChange: e => {
       dispatch({
         type: 'SWITCH_PLACE',
@@ -34127,9 +34137,10 @@ function App() {
     },
     placeholder: "Search for a place"
   }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
+    setShowForm: setShowForm,
     isChecked: isChecked,
     setIsChecked: setIsChecked
-  }), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
+  })), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
     className: "list__item",
     onClick: () => {
       setLinkClicked(false);
@@ -34226,7 +34237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59193" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55286" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

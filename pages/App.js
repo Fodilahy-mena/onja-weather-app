@@ -9,10 +9,11 @@ function App() {
     const [isChecked, setIsChecked] = useState(true);
     const [consolidatedWeather, setConsolidatedWeather] = useState([]);
     const {state, dispatch, fetchData, fetchWoeidData} = useContext(Context);
-    const {locationWoeid} = state;
+    const {locationWoeid, place} = state;
     const [linkCkicked, setLinkClicked] = useState(false);
     const [toFahrenheit, setToFahrenheit] = useState(false);
-    console.log("lnk",linkCkicked);
+    const [showForm, setShowForm] = useState(false);
+    
     function handleSearche(e) {
         e.preventDefault();
         fetchData()
@@ -23,19 +24,22 @@ function App() {
             setConsolidatedWeather(locationWoeid.consolidated_weather);
         }
     })
-    console.log("lw", locationWoeid)
-    console.log("toFah",toFahrenheit)
+    
     
     return (
         <>
             <section>
-                <form onSubmit={(e) => handleSearche(e)} className="form_search">
-                    <input type="text" onChange={(e) => {
-                        dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
-                    }} placeholder="Search for a place"/>
-                    <button>Search</button>
-                </form>
-                <SearchResult isChecked={isChecked} setIsChecked={setIsChecked}/>
+                <button onClick={() => setShowForm(!showForm)}>Search for a place</button>
+                <div className={`${showForm ? "form__open" : "form__close"} form__container`}>
+                    <button onClick={() => setShowForm(false)}>X</button>
+                    <form onSubmit={(e) => handleSearche(e)} className="form_search">
+                        <input type="text" value={place} onChange={(e) => {
+                            dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
+                        }} placeholder="Search for a place"/>
+                        <button>Search</button>
+                    </form>
+                    <SearchResult setShowForm={setShowForm} isChecked={isChecked} setIsChecked={setIsChecked}/>
+                </div>
                 {locationWoeid !== null && consolidatedWeather[0] 
                 ? 
                 <div className="list__item" onClick={() => {

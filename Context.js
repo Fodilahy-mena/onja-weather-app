@@ -25,7 +25,7 @@ function ContextProvider(props) {
     }, {
       location: null,
       place: 'Omaha',
-      woeid: '2465512',
+      woeid: 2465512,
       locationWoeid: null,
     })
 
@@ -39,8 +39,9 @@ function ContextProvider(props) {
    fetchData();
   }, [])
 
-  async function fetchWoeidData() {
-    const response = await fetch(WOEID_URL + `${state.woeid}/`);
+  async function fetchWoeidData(defaultWoeid= state.woeid) {
+    console.log("default Woeid",defaultWoeid)
+    const response = await fetch(WOEID_URL + `${defaultWoeid}/`);
     const data = await response.json();
     dispatch({ type: 'LOCATION_WOEID', locationWoeid: data });
 }

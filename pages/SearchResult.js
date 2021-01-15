@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { Context } from '../Context';
 
-function SearchResult({isChecked, setIsChecked}) {
+function SearchResult({isChecked, setIsChecked, setShowForm}) {
     const {state, dispatch, fetchWoeidData} = useContext(Context);
     const {location} = state;
     if(location !== null) {
@@ -13,10 +13,12 @@ function SearchResult({isChecked, setIsChecked}) {
             location.length > 0 ?
             <div className={isChecked == true ? 'display--none' : ''} key={loc.woeid}>
                 <p id={loc.woeid} onClick={(e) => {
-                    dispatch({ type: 'SWITCH_WOEID', switchWoeid: e.target.id })
-                    fetchWoeidData();
-                    setIsChecked(true);
-                    console.log("value", e.target.textContent);
+                    dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.textContent})
+                    fetchWoeidData(loc.woeid);
+                    setTimeout(() => {
+                        setIsChecked(true);
+                        setShowForm(false)
+                    }, 1000)
                     }}>{loc.title}</p>
             </div>
             :

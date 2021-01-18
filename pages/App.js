@@ -28,12 +28,17 @@ function App() {
     
     return (
         <>
-            <section>
+            <section className="sidebar">
                 <div>
-                <button className="button__search" onClick={() => {
-                    setShowForm(!showForm)
-                    setIsChecked(false)
-                    }}>Search for a place</button>
+                    <div>
+                        <button className="button__search" onClick={() => {
+                        setShowForm(!showForm)
+                        setIsChecked(false)
+                        }}>Search for a place 
+                        </button> 
+                        <button>🗺 </button>
+                    </div>
+
                 <div className={`${showForm ? "form__open" : "form__close"} form__container`}>
                     <div>
                         <button onClick={() => setShowForm(false)}>X</button>
@@ -61,7 +66,7 @@ function App() {
                 <p>Loading...</p>}
                 </div>
             </section>
-            <section>
+            <section className="content">
                 <div>
                     <button onClick={() => setToFahrenheit(false)}>{`\xB0C`}</button>
                     <button onClick={() => setToFahrenheit(true)}>{`\xB0F`}</button>

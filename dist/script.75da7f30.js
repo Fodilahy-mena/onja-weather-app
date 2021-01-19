@@ -34147,12 +34147,13 @@ function App() {
     isChecked: isChecked,
     setIsChecked: setIsChecked
   }))), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
+    className: "today--weather",
     onClick: () => {
       setLinkClicked(false);
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
+  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)}`, " ", /*#__PURE__*/_react.default.createElement("span", null, toFahrenheit ? `\xB0F` : `\xB0C`)), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(false)
@@ -34244,7 +34245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53361" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58684" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

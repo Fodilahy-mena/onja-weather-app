@@ -53,11 +53,11 @@ function App() {
                 </div>
                 {locationWoeid !== null && consolidatedWeather[0] 
                 ? 
-                <div onClick={() => {
+                <div className="today--weather" onClick={() => {
                     setLinkClicked(false)
                     }}>
                     <img src={`https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`}/>
-                    <h2>{`${Math.floor(toFahrenheit ? (consolidatedWeather[0].the_temp * 9 / 5) + 32 : consolidatedWeather[0].the_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`}</h2>
+                    <h2>{`${Math.floor(toFahrenheit ? (consolidatedWeather[0].the_temp * 9 / 5) + 32 : consolidatedWeather[0].the_temp)}`} <span>{toFahrenheit ? `\xB0F` : `\xB0C`}</span></h2>
                     <h3>{consolidatedWeather[0].weather_state_name}</h3>
                     <p>Today, {new Date(consolidatedWeather[0].applicable_date).toDateString()}</p>
                     <span>{locationWoeid.title}</span>

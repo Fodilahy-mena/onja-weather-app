@@ -56,11 +56,17 @@ function App() {
                 <div className="today--weather" onClick={() => {
                     setLinkClicked(false)
                     }}>
-                    <img src={`https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`}/>
-                    <h2>{`${Math.floor(toFahrenheit ? (consolidatedWeather[0].the_temp * 9 / 5) + 32 : consolidatedWeather[0].the_temp)}`} <span>{toFahrenheit ? `\xB0F` : `\xB0C`}</span></h2>
-                    <h3>{consolidatedWeather[0].weather_state_name}</h3>
-                    <p>Today, {new Date(consolidatedWeather[0].applicable_date).toDateString()}</p>
-                    <span>{locationWoeid.title}</span>
+                    <div>
+                        <img src={`https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`}/>
+                    </div>
+                    <div>
+                        <p className="temperature">{`${Math.floor(toFahrenheit ? (consolidatedWeather[0].the_temp * 9 / 5) + 32 : consolidatedWeather[0].the_temp)}`} <span>{toFahrenheit ? `\xB0F` : `\xB0C`}</span></p>
+                        <p className="weather--name">{consolidatedWeather[0].weather_state_name}</p>
+                    </div>
+                    <div>
+                        <p className="date--today">Today, {new Date(consolidatedWeather[0].applicable_date).toDateString()}</p>
+                        <span>{locationWoeid.title}</span>
+                    </div>
                 </div>
                 : 
                 <p>Loading...</p>}

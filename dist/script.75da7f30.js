@@ -34151,9 +34151,15 @@ function App() {
     onClick: () => {
       setLinkClicked(false);
     }
-  }, /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("h2", null, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)}`, " ", /*#__PURE__*/_react.default.createElement("span", null, toFahrenheit ? `\xB0F` : `\xB0C`)), /*#__PURE__*/_react.default.createElement("h3", null, consolidatedWeather[0].weather_state_name), /*#__PURE__*/_react.default.createElement("p", null, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title)) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "temperature"
+  }, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)}`, " ", /*#__PURE__*/_react.default.createElement("span", null, toFahrenheit ? `\xB0F` : `\xB0C`)), /*#__PURE__*/_react.default.createElement("p", {
+    className: "weather--name"
+  }, consolidatedWeather[0].weather_state_name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "date--today"
+  }, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(false)
@@ -34245,7 +34251,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59104" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

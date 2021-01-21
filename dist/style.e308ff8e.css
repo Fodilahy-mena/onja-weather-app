@@ -16,21 +16,66 @@ body {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
-section {
-    padding: 11px;
-    /* width: 100%;
-    height: 100vh; */
+
+.sidebar {
+    width: 100%;
+    position: relative;
 }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1e213a;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navbar::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 20%;
+    width: 100%;
+    height: 100%;
+    opacity: .05;
+    z-index: 0;
+    background: url(https://cosme-gressier-weather-app.netlify.app/img/Cloud-background.11452cab.png);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+}
+.navbar > div:first-of-type {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+.today--weather {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .temperature {
     font-style: normal;
-    /* font-weight: 500; */
-    /* font-size: 144px; */
-    /* line-height: 169px; */
     color: #E7E7EB;
 }
 
-.today--weather img {
-    max-width: 202px;
+.navbar img {
+    width: 160px;
+    max-width: 160px;
+}
+
+.navbar > div:last-of-type {
+    padding-bottom: 2rem;
+}
+
+.temperature {
+    font-size: 6rem;
+    line-height: 1;
 }
 .temperature > span {
     font-style: normal;
@@ -40,9 +85,6 @@ section {
 
 }
 
-.today--weather {
-    text-align: center;
-}
 .weather--name {
     font-style: normal;
     text-align: center;
@@ -204,12 +246,7 @@ ul {
         width: auto;
         /* height: 100%; */
     }
-    .today--weather {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
+
     .content {
         padding-top: 42px;
         padding-bottom: 154px;

@@ -34119,7 +34119,9 @@ function App() {
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
     className: "sidebar"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "navbar"
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     className: "button__search",
     onClick: () => {
       setShowForm(!showForm);
@@ -34146,12 +34148,11 @@ function App() {
     setShowForm: setShowForm,
     isChecked: isChecked,
     setIsChecked: setIsChecked
-  }))), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "today--weather",
+  }))), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: () => {
       setLinkClicked(false);
     }
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
     className: "temperature"
@@ -34251,7 +34252,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59104" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52569" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

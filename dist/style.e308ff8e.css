@@ -21,6 +21,7 @@ body {
     width: 100%;
     position: relative;
 }
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -140,24 +141,78 @@ body {
     width: 25px;
     filter: brightness(1) invert(1);
 }
+
+.content {
+    padding-top: 4rem;
+    padding-bottom: 2.5rem;
+    width: 83.333333%;
+    margin: auto;
+}
+.switch__degrees {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.75rem;
+}
+.switch__degrees > button {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    border-radius: 9999px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: rgba(30,33,58,1);
+}
+.switch__degrees > button:last-of-type {
+    margin-left: 1rem;
+}
 ul {
     padding: 0;
 }
+
+
 .weather__list {
     list-style: none;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 1.5rem;
 }
 .list__item {
+    display: flex;
+    flex-direction: column;
     background-color: #1e213a;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    border-radius: .375rem;
+    text-align: center;
 }
 .weather__list a {
     color: inherit;
     text-decoration: none;
 }
+.list__item img {
+    width: 66.666667%;
+    margin: auto;
+}
+
+.temperatures > span {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+.temperatures > span:first-of-type {
+    color: rgba(231,231,235,1);
+    margin-right: .5rem;
+}
+.temperatures > span:last-of-type {
+    color: rgba(160,159,177,1);
+    margin-left: .5rem;
+}
+
+
 .weather__details > div {
     box-sizing: border-box;
     border: 0 solid #e2e8f0;
@@ -211,7 +266,6 @@ ul {
 @media (min-width: 1024px) {
     
     .root {
-        /* height: 100%; */
         display: flex;
     }
     .sidebar {
@@ -219,22 +273,13 @@ ul {
         vertical-align: top;
         width: 25%;
         height: 100vh;
-        padding-top: 42px;
-        /* overflow: auto; */
         position: fixed;
         background-color: #1e213a;
-        
-        /* padding-bottom: 300px; */
     }
 
     .temperature {
         font-size: 6rem;
         line-height: 1;
-    }
-
-    .sidebar > div {
-        max-width: 202px;
-        margin: auto;
     }
 
     .sidebar img {
@@ -245,31 +290,28 @@ ul {
         vertical-align: middle;
     }
     
-    .content {
-        /* position: relative; */
-        display: inline-block;
-        vertical-align: top;
-        height: 100%;
-        width: 70%;
-        /* overflow: auto; */
-    }
     .sidebar > div {
-        /* padding: 42px 46px; */
         padding-top: 0px;
         width: auto;
-        /* height: 100%; */
     }
 
     .content {
-        padding-top: 42px;
-        padding-bottom: 154px;
-        padding-left: 154px;
-        padding-right: 123px;
-        overflow: auto;
         width: 75%;
-        height: 100vh;
+        display: inline-block;
+        vertical-align: top;
+        /* height: 100vh; */
         left: 25%;
         position: absolute;
+    }
+
+    .content > div, .content > h2, .content > nav {
+        /* padding-top: 4rem; */
+        /* overflow: auto; */
+        width: 83.333333%;
+        margin: auto;
+    }
+    .content .switch__degrees {
+        margin-bottom: 1.75rem;
     }
     .weather__list {
         display: grid;

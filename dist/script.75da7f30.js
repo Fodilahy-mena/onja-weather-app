@@ -34136,14 +34136,14 @@ function App() {
     viewBox: "0 0 24 24",
     xmlns: "http://www.w3.org/2000/svg"
   }, /*#__PURE__*/_react.default.createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
   }), /*#__PURE__*/_react.default.createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
   })))), /*#__PURE__*/_react.default.createElement("div", {
     className: `${showForm ? "form__open" : "form__close"} form__container`
@@ -34188,20 +34188,22 @@ function App() {
     viewBox: "0 0 24 24",
     xmlns: "http://www.w3.org/2000/svg"
   }, /*#__PURE__*/_react.default.createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
   }), /*#__PURE__*/_react.default.createElement("path", {
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round",
-    "stroke-width": "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
     d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
   })), /*#__PURE__*/_react.default.createElement("span", {
     className: "location__title"
   }, locationWoeid.title)))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
     className: "content"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "switch__degrees"
+  }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(false)
   }, `\xB0C`), /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(true)
@@ -34220,7 +34222,9 @@ function App() {
     month: 'short'
   })), /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consWeather.weather_state_abbr}.svg`
-  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.max_temp * 9 / 5 + 32 : consWeather.max_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.min_temp * 9 / 5 + 32 : consWeather.min_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`)))))) : ''), linkCkicked ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "temperatures"
+  }, /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.max_temp * 9 / 5 + 32 : consWeather.max_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`), /*#__PURE__*/_react.default.createElement("span", null, `${Math.floor(toFahrenheit ? consWeather.min_temp * 9 / 5 + 32 : consWeather.min_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`)))))) : ''), linkCkicked ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/:weatherId"
   }, /*#__PURE__*/_react.default.createElement(_WeatherDetails.default, {
     consolidatedWeather: consolidatedWeather
@@ -34291,7 +34295,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60082" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

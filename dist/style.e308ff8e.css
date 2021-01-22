@@ -3,12 +3,12 @@ html {
 }
 
 body {
-    color: #fff;
-    background-color: #100e1d;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: Raleway,sans-serif;
     height: 100vh;
+    color: #fff;
+    background-color: #100e1d;
 }
 * {
     margin: 0;
@@ -94,17 +94,17 @@ body {
     margin-top: 1rem;
 }
 .date--today {
-    font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
     color: #88869D;
 
 }
-.today--weather > span {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
+.location {
+    padding-top: 1rem;
+}
+.location__title {
+    margin-left: .5rem;
     color: #88869D;
 }
 
@@ -115,9 +115,8 @@ body {
     padding-bottom: .5rem;
     cursor: pointer;
     border-radius: .125rem;
-    background-color: rgba(136,134,157,1);;
+    background-color: rgba(136,134,157,1);
     border: none;
-    font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
@@ -126,6 +125,20 @@ body {
 
     color: #E7E7EB;
 
+}
+
+.button__location {
+    padding: .5rem;
+    background-color: rgba(136,134,157,1);
+    cursor: pointer;
+    border: 0;
+    border-radius: 9999px;
+    outline: none;
+}
+
+.button__location > svg {
+    width: 25px;
+    filter: brightness(1) invert(1);
 }
 ul {
     padding: 0;

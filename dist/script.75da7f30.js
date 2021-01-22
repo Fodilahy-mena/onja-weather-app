@@ -34127,7 +34127,9 @@ function App() {
       setShowForm(!showForm);
       setIsChecked(false);
     }
-  }, "Search for a place"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("svg", {
+  }, "Search for a place"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "button__location"
+  }, /*#__PURE__*/_react.default.createElement("svg", {
     className: "w-6 h-6",
     fill: "none",
     stroke: "currentColor",
@@ -34176,7 +34178,28 @@ function App() {
     className: "weather--name"
   }, consolidatedWeather[0].weather_state_name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
     className: "date--today"
-  }, "Today, ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("span", null, locationWoeid.title))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
+  }, "Today . ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("p", {
+    className: "location"
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    className: "w-6 h-6",
+    fill: "none",
+    width: "15px",
+    stroke: "#88869D",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+  })), /*#__PURE__*/_react.default.createElement("span", {
+    className: "location__title"
+  }, locationWoeid.title)))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setToFahrenheit(false)

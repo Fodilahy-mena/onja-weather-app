@@ -34127,7 +34127,23 @@ function App() {
       setShowForm(!showForm);
       setIsChecked(false);
     }
-  }, "Search for a place"), /*#__PURE__*/_react.default.createElement("button", null, "\uD83D\uDDFA ")), /*#__PURE__*/_react.default.createElement("div", {
+  }, "Search for a place"), /*#__PURE__*/_react.default.createElement("button", null, /*#__PURE__*/_react.default.createElement("svg", {
+    className: "w-6 h-6",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    "stroke-width": "2",
+    d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+  })))), /*#__PURE__*/_react.default.createElement("div", {
     className: `${showForm ? "form__open" : "form__close"} form__container`
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     onClick: () => setShowForm(false)
@@ -34252,7 +34268,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60082" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

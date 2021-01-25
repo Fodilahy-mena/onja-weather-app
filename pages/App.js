@@ -41,12 +41,12 @@ function App() {
 
                     <div className={`${showForm ? "form__open" : "form__close"} form__container`}>
                         <div>
-                            <button onClick={() => setShowForm(false)}>X</button>
-                            <form onSubmit={(e) => handleSearche(e)} className="form_search">
+                            <button className="button__close" onClick={() => setShowForm(false)}>X</button>
+                            <form onSubmit={(e) => handleSearche(e)} className="form__search">
                                 <input type="text" value={place} onChange={(e) => {
                                     dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
                                 }} placeholder="Search for a place"/>
-                                <button>Search</button>
+                                <button className="submit">Search</button>
                             </form>
                             <SearchResult setShowForm={setShowForm} isChecked={isChecked} setIsChecked={setIsChecked}/>
                         </div>
@@ -121,14 +121,14 @@ function App() {
                         <div>
                             <div className="details__heading">
                                 <h4>Wind Status</h4>
-                                <span>{Math.floor(consolidatedWeather[0].wind_direction)} mph</span>
+                                <p>{Math.floor(consolidatedWeather[0].wind_direction)} <span>mph</span></p>
                                 <h5>{consolidatedWeather[0].wind_direction_compass}</h5>
                             </div>
                         </div>
                         <div className="details__humidity">
                             <div className="details__heading">
                                 <h4>Humidity</h4>
-                                <h5>{consolidatedWeather[0].humidity} %</h5>
+                                <p>{consolidatedWeather[0].humidity} <span>%</span></p>
                             </div>
                             <div>
                                 <div className="humidity__percentage">
@@ -141,13 +141,13 @@ function App() {
                         <div>
                             <div className="details__heading">
                                 <h4>Visibility</h4>
-                                <h5>{Math.round(consolidatedWeather[0].visibility * 100) / 100} miles</h5>
+                                <p>{Math.round(consolidatedWeather[0].visibility * 100) / 100} <span>miles</span></p>
                             </div>
                         </div>
                         <div>
                             <div className="details__heading">
                                 <h4>Air Pressure</h4>
-                                <h5>{Math.floor(consolidatedWeather[0].air_pressure)} mb</h5>
+                                <p>{Math.floor(consolidatedWeather[0].air_pressure)} <span>mb</span></p>
                             </div>
                         </div>
                     </>

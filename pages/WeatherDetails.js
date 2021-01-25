@@ -17,14 +17,14 @@ function WeatherDetails({consolidatedWeather}) {
                 <div>
                     <div className="details__heading">
                         <h4>Wind Status</h4>
-                        <span>{Math.floor(thisWeather.wind_direction)} mph</span>
+                        <p>{Math.floor(thisWeather.wind_direction)} <span>mph</span></p>
                         <h5>{thisWeather.wind_direction_compass}</h5>
                     </div>
                 </div>
                 <div className="details__humidity">
                     <div className="details__heading">
                         <h4>Humidity</h4>
-                        <h5>{thisWeather.humidity} %</h5>
+                        <p>{thisWeather.humidity} <span>%</span></p>
                     </div>
                     <div>
                         <div className="humidity__percentage">
@@ -39,13 +39,13 @@ function WeatherDetails({consolidatedWeather}) {
                 <div>
                     <div className="details__heading">
                         <h4>Visibility</h4>
-                        <h5>{Math.round(thisWeather.visibility * 100) / 100} miles</h5>
+                        <p>{Math.round(thisWeather.visibility * 100) / 100} <span>miles</span></p>
                     </div>
                 </div>
                 <div>
                     <div className="details__heading">
                         <h4>Air Pressure</h4>
-                        <h5>{Math.floor(thisWeather.air_pressure)} mb</h5>
+                        <p>{Math.floor(thisWeather.air_pressure)} <span>mb</span></p>
                     </div>
                 </div>
                 </>

@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Raleway,sans-serif;
+    font-size: 16px;
     height: 100vh;
     color: #fff;
     background-color: #100e1d;
@@ -153,6 +154,13 @@ body {
     justify-content: flex-end;
     margin-bottom: 1.75rem;
 }
+
+.content > h2 {
+    margin-top: 3.5rem;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+}
 .switch__degrees > button {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -212,32 +220,6 @@ ul {
     margin-left: .5rem;
 }
 
-
-.weather__details > div {
-    box-sizing: border-box;
-    border: 0 solid #e2e8f0;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    background-color: #1e213a;
-}
-.weather__details > div > div {
-    /* text-align: center; */
-    display: flex;
-    flex-direction: column;
-}
-.details__heading {
-    align-items: center;
-}
-.humidity__percentage {
-    display: flex;
-    justify-content: space-between;
-}
-.humidity__progress {
-    width: 100%;
-}
-.display--none {
-    display: none;
-}
 .form__container {
     position: absolute;
     z-index: 2;
@@ -258,11 +240,101 @@ ul {
     padding: 42px 46px;
 }
 .form__open {
-    width: 480px;
+    width: auto;
+    height: auto;
     transform: translateX(0);
     box-shadow: 0 0 50px rgba(0,0,0,.5);
 }
+.form__search {
+    display: flex;
+    justify-content: center;
+}
 
+.form__search > input {
+    border: 2px solid rgba(160,159,177,1);
+    font-family: Raleway,sans-serif;
+    width: 9rem;
+    padding: .5rem;
+    background: transparent;
+    color: white;
+}
+
+.button__close {
+    font-family: Raleway,sans-serif;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: white;
+    background: none;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    margin-left: auto;
+}
+
+.submit {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-left: .5rem;
+    background-color: rgba(60,71,233,1);
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    font-weight: 600;
+    color: white;
+    line-height: inherit;
+}
+
+.weather__details {
+    display: grid;
+    grid-template-columns: repeat(1,minmax(0,1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+.weather__details > div {
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: #1e213a;
+}
+.weather__details > div > div {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+}
+.details__heading {
+    align-items: center;
+}
+.details__heading > h4 {
+    font-weight: normal;
+    margin-top: 1rem;
+}
+.humidity__percentage {
+    display: flex;
+    justify-content: space-between;
+}
+.humidity__progress {
+    width: 100%;
+}
+.display--none {
+    display: none;
+}
+
+.details__heading p {
+    margin-top: .75rem;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.details__heading span {
+    font-weight: normal;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
 @media (min-width: 1024px) {
     
     .root {

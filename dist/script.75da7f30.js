@@ -33990,7 +33990,7 @@ function SearchResult({
   return location !== null && location.map(loc => location.length > 0 ? /*#__PURE__*/_react.default.createElement("div", {
     className: isChecked == true ? 'display--none' : '',
     key: loc.woeid
-  }, /*#__PURE__*/_react.default.createElement("p", {
+  }, /*#__PURE__*/_react.default.createElement("button", {
     id: loc.woeid,
     onClick: e => {
       dispatch({
@@ -34046,11 +34046,11 @@ function WeatherDetails({
     className: "weather__details"
   }, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("span", null, Math.floor(thisWeather.wind_direction), " mph"), /*#__PURE__*/_react.default.createElement("h5", null, thisWeather.wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(thisWeather.wind_direction), " ", /*#__PURE__*/_react.default.createElement("span", null, "mph")), /*#__PURE__*/_react.default.createElement("h5", null, thisWeather.wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
     className: "details__humidity"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("h5", null, thisWeather.humidity, " %")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("p", null, thisWeather.humidity, " ", /*#__PURE__*/_react.default.createElement("span", null, "%"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "humidity__percentage"
   }, /*#__PURE__*/_react.default.createElement("div", null, "01"), /*#__PURE__*/_react.default.createElement("div", null, "50"), /*#__PURE__*/_react.default.createElement("div", null, "100")), /*#__PURE__*/_react.default.createElement("progress", {
     className: "humidity__progress",
@@ -34058,9 +34058,9 @@ function WeatherDetails({
     max: "100"
   }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("h5", null, Math.round(thisWeather.visibility * 100) / 100, " miles"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(thisWeather.visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("h5", null, Math.floor(thisWeather.air_pressure), " mb")))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(thisWeather.air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
 }
 
 var _default = WeatherDetails;
@@ -34148,10 +34148,11 @@ function App() {
   })))), /*#__PURE__*/_react.default.createElement("div", {
     className: `${showForm ? "form__open" : "form__close"} form__container`
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    className: "button__close",
     onClick: () => setShowForm(false)
   }, "X"), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
-    className: "form_search"
+    className: "form__search"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: place,
@@ -34162,7 +34163,9 @@ function App() {
       });
     },
     placeholder: "Search for a place"
-  }), /*#__PURE__*/_react.default.createElement("button", null, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
+  }), /*#__PURE__*/_react.default.createElement("button", {
+    className: "submit"
+  }, "Search")), /*#__PURE__*/_react.default.createElement(_SearchResult.default, {
     setShowForm: setShowForm,
     isChecked: isChecked,
     setIsChecked: setIsChecked
@@ -34232,11 +34235,11 @@ function App() {
     className: "weather__details"
   }, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("span", null, Math.floor(consolidatedWeather[0].wind_direction), " mph"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(consolidatedWeather[0].wind_direction), " ", /*#__PURE__*/_react.default.createElement("span", null, "mph")), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].wind_direction_compass))), /*#__PURE__*/_react.default.createElement("div", {
     className: "details__humidity"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("h5", null, consolidatedWeather[0].humidity, " %")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Humidity"), /*#__PURE__*/_react.default.createElement("p", null, consolidatedWeather[0].humidity, " ", /*#__PURE__*/_react.default.createElement("span", null, "%"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "humidity__percentage"
   }, /*#__PURE__*/_react.default.createElement("div", null, "01"), /*#__PURE__*/_react.default.createElement("div", null, "50"), /*#__PURE__*/_react.default.createElement("div", null, "100")), /*#__PURE__*/_react.default.createElement("progress", {
     className: "humidity__progress",
@@ -34244,9 +34247,9 @@ function App() {
     max: "100"
   }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("h5", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " miles"))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("h5", null, Math.floor(consolidatedWeather[0].air_pressure), " mb")))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....")))));
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(consolidatedWeather[0].air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....")))));
 }
 
 var _default = App;
@@ -34295,7 +34298,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58415" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50989" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -33,7 +33,7 @@ function WeatherDetails({consolidatedWeather}) {
                             <div>100</div>
                         </div>
                         <progress className="humidity__progress" value={thisWeather.humidity} max="100"></progress>
-                        <div> % </div>
+                        <div className="align__right"> % </div>
                     </div>
                 </div>
                 <div>

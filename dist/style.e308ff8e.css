@@ -152,6 +152,7 @@ body {
 .switch__degrees {
     display: flex;
     justify-content: flex-end;
+    position: relative;
     margin-bottom: 1.75rem;
 }
 
@@ -228,6 +229,17 @@ ul {
     bottom: 0;
     left: 0;
     background-color: #1e213a;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.button__place {
+    padding: 1rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
 }
 .form__close {
     padding: 42px 46px;
@@ -294,6 +306,7 @@ ul {
     margin-top: 2rem;
 }
 .weather__details > div {
+    height: 200px;
     box-sizing: border-box;
     border: 0 solid #e2e8f0;
     padding-left: 1.25rem;
@@ -311,6 +324,13 @@ ul {
 .details__heading > h4 {
     font-weight: normal;
     margin-top: 1rem;
+}
+.details__heading > h5 {
+    font-weight: normal;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 .humidity__percentage {
     display: flex;
@@ -334,6 +354,10 @@ ul {
     font-weight: normal;
     font-size: 1.875rem;
     line-height: 2.25rem;
+}
+
+.align__right {
+    margin-left: auto;
 }
 @media (min-width: 1024px) {
     
@@ -376,11 +400,19 @@ ul {
         position: absolute;
     }
 
-    .content > div, .content > h2, .content > nav {
+    .content > div, .content > nav {
         /* padding-top: 4rem; */
         /* overflow: auto; */
         width: 83.333333%;
         margin: auto;
+    }
+
+    .content > h2 {
+        
+        width: 83.333333%;
+        margin: auto;
+        margin-top: 3.5rem;
+        margin-bottom: 2rem;
     }
     .content .switch__degrees {
         margin-bottom: 1.75rem;
@@ -390,6 +422,9 @@ ul {
         grid-template-columns: repeat(5,minmax(0,1fr));
         grid-gap: 1rem;
         gap: 1rem;
+    }
+    .list__item {
+        height: 215px;
     }
     .weather__details {
         display: grid;

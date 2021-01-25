@@ -12,7 +12,7 @@ function SearchResult({isChecked, setIsChecked, setShowForm}) {
         location !== null && location.map(loc => (
             location.length > 0 ?
             <div className={isChecked == true ? 'display--none' : ''} key={loc.woeid}>
-                <button id={loc.woeid} onClick={(e) => {
+                <button className="button__place" id={loc.woeid} onClick={(e) => {
                     dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.textContent})
                     fetchWoeidData(loc.woeid);
                     setTimeout(() => {

@@ -33991,6 +33991,7 @@ function SearchResult({
     className: isChecked == true ? 'display--none' : '',
     key: loc.woeid
   }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "button__place",
     id: loc.woeid,
     onClick: e => {
       dispatch({
@@ -34056,7 +34057,9 @@ function WeatherDetails({
     className: "humidity__progress",
     value: thisWeather.humidity,
     max: "100"
-  }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "align__right"
+  }, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
   }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(thisWeather.visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
@@ -34105,6 +34108,7 @@ function App() {
   const [linkCkicked, setLinkClicked] = (0, _react.useState)(false);
   const [toFahrenheit, setToFahrenheit] = (0, _react.useState)(false);
   const [showForm, setShowForm] = (0, _react.useState)(false);
+  console.log(linkCkicked);
 
   function handleSearche(e) {
     e.preventDefault();
@@ -34170,16 +34174,30 @@ function App() {
     isChecked: isChecked,
     setIsChecked: setIsChecked
   }))), locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    onClick: () => {
-      setLinkClicked(false);
+    onClick: () => setLinkClicked(false),
+    style: {
+      position: 'relative',
+      cursor: 'pointer'
     }
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    onClick: () => setLinkClicked(false),
+    style: {
+      position: 'relative',
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/_react.default.createElement("p", {
     className: "temperature"
   }, `${Math.floor(toFahrenheit ? consolidatedWeather[0].the_temp * 9 / 5 + 32 : consolidatedWeather[0].the_temp)}`, " ", /*#__PURE__*/_react.default.createElement("span", null, toFahrenheit ? `\xB0F` : `\xB0C`)), /*#__PURE__*/_react.default.createElement("p", {
     className: "weather--name"
-  }, consolidatedWeather[0].weather_state_name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
+  }, consolidatedWeather[0].weather_state_name)), /*#__PURE__*/_react.default.createElement("div", {
+    onClick: () => setLinkClicked(false),
+    style: {
+      position: 'relative',
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/_react.default.createElement("p", {
     className: "date--today"
   }, "Today . ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("p", {
     className: "location"
@@ -34245,7 +34263,9 @@ function App() {
     className: "humidity__progress",
     value: consolidatedWeather[0].humidity,
     max: "100"
-  }), /*#__PURE__*/_react.default.createElement("div", null, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: "align__right"
+  }, " % "))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
   }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
@@ -34298,7 +34318,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50989" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49466" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

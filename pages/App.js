@@ -13,7 +13,7 @@ function App() {
     const [linkCkicked, setLinkClicked] = useState(false);
     const [toFahrenheit, setToFahrenheit] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    
+    console.log(linkCkicked)
     function handleSearche(e) {
         e.preventDefault();
         fetchData()
@@ -54,16 +54,14 @@ function App() {
                     {locationWoeid !== null && consolidatedWeather[0] 
                     ? 
                     <>
-                        <div onClick={() => {
-                        setLinkClicked(false)
-                        }}>
+                        <div onClick={() => setLinkClicked(false)} style={{position: 'relative', cursor: 'pointer'}}>
                             <img src={`https://www.metaweather.com//static/img/weather/${consolidatedWeather[0].weather_state_abbr}.svg`}/>
                         </div>
-                        <div>
+                        <div onClick={() => setLinkClicked(false)} style={{position: 'relative', cursor: 'pointer'}}>
                             <p className="temperature">{`${Math.floor(toFahrenheit ? (consolidatedWeather[0].the_temp * 9 / 5) + 32 : consolidatedWeather[0].the_temp)}`} <span>{toFahrenheit ? `\xB0F` : `\xB0C`}</span></p>
                             <p className="weather--name">{consolidatedWeather[0].weather_state_name}</p>
                         </div>
-                        <div>
+                        <div onClick={() => setLinkClicked(false)} style={{position: 'relative', cursor: 'pointer'}}>
                             <p className="date--today">Today . {new Date(consolidatedWeather[0].applicable_date).toDateString()}</p>
                             <p className="location">
                                 <svg 
@@ -135,7 +133,7 @@ function App() {
                                     <div>01</div><div>50</div><div>100</div>
                                 </div>
                                 <progress className="humidity__progress" value={consolidatedWeather[0].humidity} max="100"></progress>
-                                <div> % </div>
+                                <div className="align__right"> % </div>
                             </div>
                         </div>
                         <div>

@@ -34063,7 +34063,9 @@ function WeatherDetails({
     className: "details__heading"
   }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(thisWeather.visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(thisWeather.air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....");
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(thisWeather.air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))))) : /*#__PURE__*/_react.default.createElement("p", {
+    className: "loading unable__toloade"
+  }, "Loading...., you can click on the weather of today or on each one of next 5 days weather if can't wait.");
 }
 
 var _default = WeatherDetails;
@@ -34108,7 +34110,6 @@ function App() {
   const [linkCkicked, setLinkClicked] = (0, _react.useState)(false);
   const [toFahrenheit, setToFahrenheit] = (0, _react.useState)(false);
   const [showForm, setShowForm] = (0, _react.useState)(false);
-  console.log(linkCkicked);
 
   function handleSearche(e) {
     e.preventDefault();
@@ -34220,13 +34221,17 @@ function App() {
     d: "M15 11a3 3 0 11-6 0 3 3 0 016 0z"
   })), /*#__PURE__*/_react.default.createElement("span", {
     className: "location__title"
-  }, locationWoeid.title)))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
+  }, locationWoeid.title)))) : /*#__PURE__*/_react.default.createElement("p", {
+    className: "loading"
+  }, "Loading..."))), /*#__PURE__*/_react.default.createElement("section", {
     className: "content"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "switch__degrees"
   }, /*#__PURE__*/_react.default.createElement("button", {
+    className: toFahrenheit && 'active',
     onClick: () => setToFahrenheit(false)
   }, `\xB0C`), /*#__PURE__*/_react.default.createElement("button", {
+    className: !toFahrenheit && 'active',
     onClick: () => setToFahrenheit(true)
   }, `\xB0F`)), /*#__PURE__*/_react.default.createElement("nav", null, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("ul", {
     className: "weather__list"
@@ -34269,7 +34274,9 @@ function App() {
     className: "details__heading"
   }, /*#__PURE__*/_react.default.createElement("h4", null, "Visibility"), /*#__PURE__*/_react.default.createElement("p", null, Math.round(consolidatedWeather[0].visibility * 100) / 100, " ", /*#__PURE__*/_react.default.createElement("span", null, "miles")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: "details__heading"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(consolidatedWeather[0].air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))) : /*#__PURE__*/_react.default.createElement("p", null, "Loading....")))));
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Air Pressure"), /*#__PURE__*/_react.default.createElement("p", null, Math.floor(consolidatedWeather[0].air_pressure), " ", /*#__PURE__*/_react.default.createElement("span", null, "mb"))))) : /*#__PURE__*/_react.default.createElement("p", {
+    className: "loading"
+  }, "Loading....")))));
 }
 
 var _default = App;
@@ -34318,7 +34325,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49466" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55676" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

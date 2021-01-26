@@ -13,7 +13,7 @@ function App() {
     const [linkCkicked, setLinkClicked] = useState(false);
     const [toFahrenheit, setToFahrenheit] = useState(false);
     const [showForm, setShowForm] = useState(false);
-    console.log(linkCkicked)
+    
     function handleSearche(e) {
         e.preventDefault();
         fetchData()
@@ -76,13 +76,13 @@ function App() {
                         </div>
                     </>
                     : 
-                    <p>Loading...</p>}
+                    <p className="loading">Loading...</p>}
                 </div>
             </section>
             <section className="content">
                 <div className="switch__degrees">
-                    <button onClick={() => setToFahrenheit(false)}>{`\xB0C`}</button>
-                    <button onClick={() => setToFahrenheit(true)}>{`\xB0F`}</button>
+                    <button className={toFahrenheit && 'active'} onClick={() => setToFahrenheit(false)}>{`\xB0C`}</button>
+                    <button className={!toFahrenheit && 'active'} onClick={() => setToFahrenheit(true)}>{`\xB0F`}</button>
                 </div>
                 <nav>
                     {locationWoeid !== null && consolidatedWeather[0] 
@@ -150,7 +150,7 @@ function App() {
                         </div>
                     </>
                     :
-                    <p>Loading....</p>
+                    <p className="loading">Loading....</p>
                     }
                     </div>
                     </>

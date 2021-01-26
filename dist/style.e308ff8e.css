@@ -176,6 +176,10 @@ body {
     cursor: pointer;
     color: rgba(30,33,58,1);
 }
+.switch__degrees .active {
+    color: white;
+    background-color: rgba(30,33,58,1);
+}
 .switch__degrees > button:last-of-type {
     margin-left: 1rem;
 }
@@ -234,12 +238,20 @@ ul {
 }
 
 .button__place {
+    background: transparent;
+    border: none;
     padding: 1rem;
     margin-top: 4rem;
     margin-bottom: 4rem;
     width: 100%;
     text-align: left;
+    color: rgba(231,231,235,1);
     cursor: pointer;
+}
+
+.button__place:hover {
+    border-radius: 1px;
+    box-shadow: 0px .5px 3px rgba(231,231,235,1);
 }
 .form__close {
     padding: 42px 46px;
@@ -358,6 +370,20 @@ ul {
 
 .align__right {
     margin-left: auto;
+}
+
+.loading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+.navbar .loading {
+    position:relative;
+    top: -58%;
+}
+.unable__toloade {
+    width: 83.333333%;
+    margin: auto;
+    margin-top: 4rem;
 }
 @media (min-width: 1024px) {
     

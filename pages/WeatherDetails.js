@@ -52,7 +52,7 @@ function WeatherDetails({consolidatedWeather}) {
             </div>
         </>
         :
-        <p>Loading....</p>
+        <p className="loading unable__toloade">Loading...., you can click on the weather of today or on each one of next 5 days weather if can't wait.</p>
     )
 }
 

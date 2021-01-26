@@ -41,7 +41,9 @@ function App() {
 
                     <div className={`${showForm ? "form__open" : "form__close"} form__container`}>
                         <div>
-                            <button className="button__close" onClick={() => setShowForm(false)}>X</button>
+                            <button className="button__close" onClick={() => setShowForm(false)}>
+                                <svg className="w-6 h-6" width="35px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
                             <form onSubmit={(e) => handleSearche(e)} className="form__search">
                                 <input type="text" value={place} onChange={(e) => {
                                     dispatch({ type: 'SWITCH_PLACE', switchPlace: e.target.value })
@@ -62,7 +64,7 @@ function App() {
                             <p className="weather--name">{consolidatedWeather[0].weather_state_name}</p>
                         </div>
                         <div onClick={() => setLinkClicked(false)} style={{position: 'relative', cursor: 'pointer'}}>
-                            <p className="date--today">Today . {new Date(consolidatedWeather[0].applicable_date).toDateString()}</p>
+                            <p className="date--today">Today . {new Date(consolidatedWeather[0].applicable_date).toDateString().slice(0, -4)}</p>
                             <p className="location">
                                 <svg 
                                 className="w-6 h-6" fill="none" width="15px" 
@@ -81,8 +83,8 @@ function App() {
             </section>
             <section className="content">
                 <div className="switch__degrees">
-                    <button className={toFahrenheit && 'active'} onClick={() => setToFahrenheit(false)}>{`\xB0C`}</button>
-                    <button className={!toFahrenheit && 'active'} onClick={() => setToFahrenheit(true)}>{`\xB0F`}</button>
+                    <button className={toFahrenheit === true ? 'active' : ''} onClick={() => setToFahrenheit(false)}>{`\xB0C`}</button>
+                    <button className={toFahrenheit === false ? 'active' : ''} onClick={() => setToFahrenheit(true)}>{`\xB0F`}</button>
                 </div>
                 <nav>
                     {locationWoeid !== null && consolidatedWeather[0] 
@@ -91,7 +93,7 @@ function App() {
                         {locationWoeid.consolidated_weather.slice(1).map((consWeather, index) => (
                             <Link to={`/${consWeather.id}`} key={index}>
                                 <li onClick={() => setLinkClicked(true)} className="list__item" key={consWeather.id}>
-                                    <span>{index === 0 ? "Tomorrow" : new Date(consWeather.applicable_date).toDateString('en-uk', { day: 'numeric', weekday: 'short', month: 'short' })}</span>
+                                    <span>{index === 0 ? "Tomorrow" : new Date(consWeather.applicable_date).toDateString('en-uk', { day: 'numeric', weekday: 'short', month: 'short' }).slice(0, -4)}</span>
                                     <img src={`https://www.metaweather.com//static/img/weather/${consWeather.weather_state_abbr}.svg`}/>
                                     <div className="temperatures">
                                         <span>{`${Math.floor(toFahrenheit ? (consWeather.max_temp * 9 / 5) + 32 : consWeather.max_temp)} ${toFahrenheit ? `\xB0F` : `\xB0C`}`}</span>

@@ -132,7 +132,7 @@ body {
 .button__location {
     padding: .5rem;
     background-color: rgba(136,134,157,1);
-    cursor: pointer;
+    cursor: not-allowed;
     border: 0;
     border-radius: 9999px;
     outline: none;
@@ -283,11 +283,17 @@ ul {
     color: white;
 }
 
+.form__search > input, .button__place {
+    font-style: normal;
+    font-size: 16px;
+    font-weight: normal;
+}
+
 .button__close {
     font-family: Raleway,sans-serif;
     font-size: 2.25rem;
     line-height: 2.5rem;
-    color: white;
+    color: #e7e7eb;
     background: none;
     border: 0;
     outline: none;
@@ -306,6 +312,7 @@ ul {
     border: 0;
     cursor: pointer;
     outline: none;
+    font-size: 16px;
     font-weight: 600;
     color: white;
     line-height: inherit;
@@ -330,6 +337,11 @@ ul {
     display: flex;
     flex-direction: column;
 }
+
+.details__humidity > div:last-of-type {
+    max-width: 60%;
+    margin: auto;
+}
 .details__heading {
     align-items: center;
 }
@@ -345,12 +357,33 @@ ul {
     margin-right: 2rem;
 }
 .humidity__percentage {
+    margin-top: .5rem;
     display: flex;
     justify-content: space-between;
 }
 .humidity__progress {
     width: 100%;
 }
+
+.humidity__progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 9px;
+  }
+
+.humidity__progress[value]::-webkit-progress-bar {
+    background-color:#f6eeee;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+
+.humidity__progress[value]::-webkit-progress-value {
+    background: rgba(255,236,101,1);
+    border-radius: 12px; 
+}
+
+
+
 .display--none {
     display: none;
 }

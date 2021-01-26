@@ -34155,7 +34155,19 @@ function App() {
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
     className: "button__close",
     onClick: () => setShowForm(false)
-  }, "X"), /*#__PURE__*/_react.default.createElement("form", {
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    className: "w-6 h-6",
+    width: "35px",
+    fill: "none",
+    stroke: "currentColor",
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M6 18L18 6M6 6l12 12"
+  }))), /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: e => handleSearche(e),
     className: "form__search"
   }, /*#__PURE__*/_react.default.createElement("input", {
@@ -34200,7 +34212,7 @@ function App() {
     }
   }, /*#__PURE__*/_react.default.createElement("p", {
     className: "date--today"
-  }, "Today . ", new Date(consolidatedWeather[0].applicable_date).toDateString()), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Today . ", new Date(consolidatedWeather[0].applicable_date).toDateString().slice(0, -4)), /*#__PURE__*/_react.default.createElement("p", {
     className: "location"
   }, /*#__PURE__*/_react.default.createElement("svg", {
     className: "w-6 h-6",
@@ -34228,10 +34240,10 @@ function App() {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "switch__degrees"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    className: toFahrenheit && 'active',
+    className: toFahrenheit === true ? 'active' : '',
     onClick: () => setToFahrenheit(false)
   }, `\xB0C`), /*#__PURE__*/_react.default.createElement("button", {
-    className: !toFahrenheit && 'active',
+    className: toFahrenheit === false ? 'active' : '',
     onClick: () => setToFahrenheit(true)
   }, `\xB0F`)), /*#__PURE__*/_react.default.createElement("nav", null, locationWoeid !== null && consolidatedWeather[0] ? /*#__PURE__*/_react.default.createElement("ul", {
     className: "weather__list"
@@ -34246,7 +34258,7 @@ function App() {
     day: 'numeric',
     weekday: 'short',
     month: 'short'
-  })), /*#__PURE__*/_react.default.createElement("img", {
+  }).slice(0, -4)), /*#__PURE__*/_react.default.createElement("img", {
     src: `https://www.metaweather.com//static/img/weather/${consWeather.weather_state_abbr}.svg`
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "temperatures"
@@ -34325,7 +34337,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55676" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50317" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
